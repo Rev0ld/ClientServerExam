@@ -1,10 +1,11 @@
 ﻿using System;
 using BusinessLayer;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace Client
 {
-    internal class Program
+    class Program
     {
         static Dictionary<Type, object> receivedOperation = new Dictionary<Type, object>();
         static Dictionary<Type, object> receivedData = new Dictionary<Type, object>();
@@ -75,9 +76,86 @@ namespace Client
             byte age = Convert.ToByte(Console.ReadLine());
 
             Console.WriteLine("Points: ");
-            List<int> points = Console.ReadLine().Split('').Select(int.Parse).ToList();
+            List<int> points = Console.ReadLine().Split(' ').Select(int.Parse).ToList();
 
-            Student student = new Student(name, age);
+            Student student = new Student(name, age, points);
+
+            operationToSend = TransformDataManager.Serialize(1);
+            dataToSend = TransformDataManager.Serialize(student);
+
+            ClientManager.SendMessage(operationToSend);
+            ClientManager.SendMessage(dataToSend);
+        }
+
+        private static void CreateClassroom() 
+        {
+            Console.WriteLine("Name: ");
+            string name = Console.ReadLine();
+
+            Console.WriteLine("Subject: ");
+            string subject = Console.ReadLine();  
+
+            Classroom classroom = new Classroom(name, subject); 
+
+            operationToSend = TransformDataManager.Serialize(2);
+            dataToSend = TransformDataManager.Serialize(classroom);
+
+            ClientManager.SendMessage(operationToSend);
+            ClientManager.SendMessage(dataToSend);
+        }
+
+        private static void ViewStudent() 
+        {
+            operationToSend = TransformDataManager.Serialize(3);
+            dataToSend = TransformDataManager.Serialize(string.Empty);
+
+            ClientManager.SendMessage(operationToSend);
+            ClientManager.SendMessage(dataToSend);
+
+            receivedData = ClientManager.WaitForMessage();
+
+            List<Student> students = receivedData[typeof(List<Student>)] as List<Student>;
+
+            Console.WriteLine(Environment.NewLine + "Student Information: ");
+            foreach (Student student in students)
+            {
+                Console.WriteLine("ID: {0}", student.ID);
+                Console.WriteLine("Name: {0} # Age: {1} # {3}", student.Name, student.Age, student.Points);
+
+            }
+            Console.WriteLine();
+        }
+
+        private static void ViewClassroom() 
+        {
+            operationToSend = TransformDataManager.Serialize(4);
+            dataToSend = TransformDataManager.Serialize(string.Empty);
+
+            ClientManager.SendMessage(operationToSend);
+            ClientManager.SendMessage(dataToSend);
+
+            receivedData = ClientManager.WaitForMessage();
+
+            List<Classroom> classrooms = receivedData[typeof(List<Classroom>)] as List<Classroom>;
+
+            Console.WriteLine(Environment.NewLine + "Classroom Information: ");
+
+            foreach (Classroom classroom in classrooms) 
+            {
+                Console.WriteLine("ID: {0}", classroom.ID);
+                Console.WriteLine("Name: {0} # Subject: {1}", classroom.Name, classroom.Subject);
+            }
+            Console.WriteLine();
+
+        }
+
+        public static void EndCommunication() 
+        {
+            operationToSend = TransformDataManager.Serialize(5);
+            dataToSend = TransformDataManager.Serialize(string.Empty);
+
+            ClientManager.SendMessage(operationToSend);
+            ClientManager.SendMessage(dataToSend);
         }
     }
 }

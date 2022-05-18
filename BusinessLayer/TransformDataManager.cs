@@ -8,7 +8,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 
 namespace BusinessLayer
 {
-    public class TransferDataManager
+    public class TransformDataManager
     {
         public static BinaryMessage Serialize(object anySerializableObject) 
         {

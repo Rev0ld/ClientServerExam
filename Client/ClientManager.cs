@@ -62,12 +62,12 @@ namespace Client
 
             clientSocket.Receive(binaryMessage.Data);
 
-            return RecieveMessage(binaryMessage);
+            return ReceiveMessage(binaryMessage);
         }
 
         private static Dictionary<Type, object> ReceiveMessage(BinaryMessage binaryMessage) 
         {
-            object obj = TransferDataManager.Deserialize(binaryMessage);
+            object obj = TransformDataManager.Deserialize(binaryMessage);
 
 
             if (obj is int)

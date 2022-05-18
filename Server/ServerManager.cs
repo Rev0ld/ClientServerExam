@@ -18,7 +18,7 @@ namespace Server
         static string serverIP;
         public static bool CommunicationIsActive = true;
 
-        public static void InitialiseServer() 
+        public static void InitializeServer() 
         {
             Console.Write("Enter server IP address to use (or nothing for local IP): ");
             serverIP = Console.ReadLine();
@@ -40,7 +40,7 @@ namespace Server
             Console.WriteLine("Socket local endpoint: {0}", serverSocket.LocalEndPoint.ToString());
         }
 
-        public static void ListenForNEwConections() 
+        public static void ListenForNewConections() 
         {
             clientSocket = server.AcceptSocket();
 
