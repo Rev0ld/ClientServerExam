@@ -120,7 +120,33 @@ namespace Server
 
         public static void SendMessage(BinaryMessage binaryMessage) 
         {
-            clientSocket
+            clientSocket.Send(binaryMessage.Data);
+
+            Console.WriteLine("Server sent {0} bytes to the client!", binaryMessage.Data.Length);
+        }
+
+        public static bool ContinueListening() 
+        {
+            Console.WriteLine("Continue listening for new connections? [y/Y or n/N]");
+
+            string input = Console.ReadLine();
+
+
+            if (input.ToLower() == "y")
+            {
+                CommunicationIsActive = true;
+                return true;
+            }
+            else 
+            {
+                CommunicationIsActive = false;
+                return false;
+            }
+        }
+
+        public static void CloseConnection() 
+        {
+            server.Stop();
         }
     }
 }

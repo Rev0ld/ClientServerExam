@@ -24,6 +24,7 @@ namespace BusinessLayer
 
         public Classroom(string name, string subject)
         {
+            this.ID = Guid.NewGuid().ToString();
             Name = name;
             Subject = subject;
             

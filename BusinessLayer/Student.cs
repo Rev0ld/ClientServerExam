@@ -25,6 +25,7 @@ namespace BusinessLayer
 
         public Student(string name, byte age, List<int> points)
         {
+            this.ID = Guid.NewGuid().ToString();
             Name = name;
             Age = age;
             Points = points;
