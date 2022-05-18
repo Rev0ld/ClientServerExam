@@ -69,13 +69,13 @@ namespace Client
         }
         private static void CreateStudent() 
         {
-            Console.WriteLine("Name: ");
+            Console.Write("Name: ");
             string name = Console.ReadLine();
 
-            Console.WriteLine("Age: ");
+            Console.Write("Age: ");
             byte age = Convert.ToByte(Console.ReadLine());
 
-            Console.WriteLine("Points: ");
+            Console.Write("Points: ");
             List<int> points = Console.ReadLine().Split(' ').Select(int.Parse).ToList();
 
             Student student = new Student(name, age, points);
@@ -89,10 +89,10 @@ namespace Client
 
         private static void CreateClassroom() 
         {
-            Console.WriteLine("Name: ");
+            Console.Write("Name: ");
             string name = Console.ReadLine();
 
-            Console.WriteLine("Subject: ");
+            Console.Write("Subject: ");
             string subject = Console.ReadLine();  
 
             Classroom classroom = new Classroom(name, subject); 
