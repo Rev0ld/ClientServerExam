@@ -120,7 +120,7 @@ namespace Client
             foreach (Student student in students)
             {
                 Console.WriteLine("ID: {0}", student.ID);
-                Console.WriteLine("Name: {0} # Age: {1} # {3}", student.Name, student.Age, student.Points);
+                Console.WriteLine("Name: {0} # Age: {1} # Points: {2}", student.Name, student.Age, string.Join(", ", student.Points));
 
             }
             Console.WriteLine();

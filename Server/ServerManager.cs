@@ -60,7 +60,7 @@ namespace Server
 
         private static Dictionary<Type, object> RecieveMessage(BinaryMessage binaryMessage) 
         {
-            object obj = TransferDataManager.Deserialize(binaryMessage);
+            object obj = TransformDataManager.Deserialize(binaryMessage);
 
             if (obj is int)
             {
