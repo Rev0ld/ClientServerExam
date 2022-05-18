@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BusinessLayer
+namespace Student
 {
     public class Class1
     {
